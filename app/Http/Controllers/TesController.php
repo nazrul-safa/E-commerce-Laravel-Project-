@@ -12,7 +12,8 @@ class TesController extends Controller
 {
     public function __construct()
     {
-    $this->middleware('auth');
+        $this->middleware('auth');
+        $this->middleware('checkrole');
     }
     function tes(){
     $tes_data = Tes::all();

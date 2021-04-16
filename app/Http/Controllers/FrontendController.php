@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Faq;
+use App\Models\User;
 use App\Models\Tes;
 use App\Models\Cart;
 use App\Models\Coupon;
+use App\Models\Country;
 use Carbon\Carbon;
+use Hash;
+use Auth;
 class FrontendController extends Controller
 {
     function home(){
@@ -52,34 +56,36 @@ class FrontendController extends Controller
         return view('contact');
     }
     
-    function cart($coupon_name = 'coupon nai'){
+    function cart($coupon_name = ''){
         $coupon_discount = 0;
-        if ($coupon_name == 'coupon nai') {
+        if ($coupon_name == '') {
             $coupon_discount = 0;
         }
         else{
             
             if (Coupon::where('coupon_name',$coupon_name)->exists()) {
                 if (Carbon::now()->format('Y-m-d') > Coupon::where('coupon_name',$coupon_name)->first()->expire_date) {
-                    echo 'expired' ;
+                
+                    return back()->with('coupon_error', 'This coupon is Expired');
                }
                else{
                    if(Coupon::where('coupon_name',$coupon_name)->first()->uses_limit > 0){
                      $coupon_discount = Coupon::where('coupon_name',$coupon_name)->first()->discount_amount; 
                    }
                     else{
-                        echo 'limit sesh';
+                        return back()->with('coupon_error', 'This coupon Limit is sesh');
                     }
                }
             }
             else{
-                echo 'invalid';
+                return back()->with('coupon_error', 'Invalid Coupon Name');
             }
         }
         
         $carts = Cart::where('ip_address',request()->ip())->get();
         $coupon_discount;
-        return view('cart',compact('carts','coupon_discount'));
+        $coupon_name;
+        return view('cart',compact('carts','coupon_discount','coupon_name'));
     }
     function updatecart(Request $req){
         foreach($req->quantity as $cart_id => $quantity){
@@ -90,6 +96,47 @@ class FrontendController extends Controller
             }
         }
        return back();
+    }
+    function checkout(){
+        $countries= Country::select('id','name')->get();
+        return view('checkout',compact('countries'));
+    }
+    function customer_register(){
+        return view('customer_register');
+    }
+    function customer_post(Request $req){
+        User::insert([
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => bcrypt($req->password),
+            'role' => 2,
+            'created_at' => Carbon::now()
+        ]);
+        return back();
+    }
+    function customer_login(){
+        
+        return view('customer_login');
+    }
+    function customer_login_post(Request $req){
+        
+        
+ //return $req->password;
+       if( User::where('email',$req->email)->exists()){
+           $db_password =  User::where('email',$req->email)->first()->password;
+           if (Hash::check($req->password, $db_password)) {
+             if(Auth::attempt($req->except('_token'))){
+                 return redirect()->intended('home');
+             }  
+            //return view('customer_dashbord');
+           }
+           else{
+               return back()->with('customer_login_error','Your email or password is incorrect');
+           }
+       }
+       else{
+           return back()->with('customer_login_error','Email Not Found');
+       }
     }
      
 } 

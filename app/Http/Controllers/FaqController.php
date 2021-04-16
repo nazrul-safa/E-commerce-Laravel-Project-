@@ -9,9 +9,10 @@ use Carbon\Carbon;
 class FaqController extends Controller
 {
      public function __construct()
-          {
+     {
           $this->middleware('auth');
-          }
+          $this->middleware('checkrole');
+     }
      function faq(){
           $faq_data = Faq::all();
           return view('faq', compact('faq_data'));

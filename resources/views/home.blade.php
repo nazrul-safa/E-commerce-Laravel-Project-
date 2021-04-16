@@ -13,11 +13,15 @@
   </nav>
 @endsection
 @section('content')
+<h2>Role: {{ Auth::user()->role }}</h2>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if (Auth::user()->role==1)
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">
+                    Hello Admin
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -47,10 +51,21 @@
                                 </tr>
                              @endforeach
                         </tbody>
-                      </table>
-                      
+                      </table>  
                 </div>
             </div>
+            @else
+                <div class="card">
+                    <div class="card-header">
+                        Hello customer
+                    </div>
+                    <div class="card-body">
+ 
+                    </div>
+                    
+                </div>
+            @endif
+           
         </div>
     </div>
 </div>

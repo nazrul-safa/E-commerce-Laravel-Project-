@@ -92,8 +92,14 @@
                                     <h3>Coupon</h3>
                                     <p>Enter Your Co upon Code if You Have One</p>
                                     <div class="cupon-wrap">
-                                        <input type="text" placeholder="Cupon Code">
-                                        <button type="button ">Apply Coupon</button>
+                                        <input type="text" placeholder="Cupon Code" id="apply_coupon_input" value="{{ $coupon_name }}">
+                                        <button type="button" id="apply_coupon">Apply Coupon</button>
+                                        @if (session('coupon_error'))
+                                            <div class="alert alert-danger mt-3">
+                                                {{ session('coupon_error') }}
+                                            </div>
+                                        @endif
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -103,12 +109,22 @@
                                     <ul>
                                         <li><span class="pull-left">Subtotal </span>{{ $subtotal }}</li>
                                         <li><span class="pull-left">Discount </span>{{ $coupon_discount }}%</li>
-                                        <li><span class="pull-left"> Total </span> $380.00</li>
+                                        <li><span class="pull-left">Discount(In amount)</span>{{ ($coupon_discount/100)* $subtotal}}</li>
+                                        <li><span class="pull-left"> Total </span> {{ $subtotal - (($coupon_discount/100)* $subtotal) }}</li>
+                                        @php
+                                            session([
+                                                'session_subtotal' => $subtotal,
+                                                'session_coupon_name' => $coupon_name,
+                                                'session_coupon_discount'  => $coupon_discount,
+                                                'session_coupon_discount_in_amount'  => ($coupon_discount/100)* $subtotal,
+                                                'session_total'  => $subtotal - (($coupon_discount/100)* $subtotal),
+                                            ]);
+                                        @endphp
                                     </ul>
                                     @if ($flag)
                                         <a href="">Problem </a>
                                     @else
-                                        <a href="checkout.html">Proceed to Checkout</a>
+                                        <a href="{{ route('checkout') }}">Proceed to Checkout</a>
                                     @endif
                                 </div>
                             </div>
@@ -120,4 +136,15 @@
     </div>
     <!-- cart-area end -->
 
+@endsection
+@section('footer_scripts')
+    <script>
+        $(document).ready(function(){
+            $('#apply_coupon').click(function(){
+                var coupon_name = $('#apply_coupon_input').val();
+                var link_to_go = "{{ url('cart') }}/" + coupon_name ;
+                window.location.href = link_to_go;
+            });
+        });
+    </script> 
 @endsection

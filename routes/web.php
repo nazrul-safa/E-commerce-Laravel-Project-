@@ -22,6 +22,11 @@ Route::get('categorywise/shop/{category_id}',[FrontendController::class, 'catego
 Route::get('cart',[FrontendController::class, 'cart'])->name('cart');
 Route::post('update/cart',[FrontendController::class, 'updatecart'])->name('updatecart');
 Route::get('cart/{coupon_name}',[FrontendController::class, 'cart'])->name('cartwithcoupon');
+Route::get('checkout',[FrontendController::class, 'checkout'])->name('checkout');
+Route::get('customer/register',[FrontendController::class, 'customer_register'])->name('customer_register');
+Route::post('customer/register/post',[FrontendController::class, 'customer_post'])->name('customer_post');
+Route::get('customer/login',[FrontendController::class, 'customer_login'])->name('customer_login');
+Route::post('customer/login/post',[FrontendController::class, 'customer_login_post'])->name('customer_login_post');
 
 //route of contact controller
 Route::get('contact',[ContactController::class, 'contact'])->name('tohoney_contact');

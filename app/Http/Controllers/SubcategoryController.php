@@ -8,6 +8,11 @@ use App\Models\Subcategory;
 use Carbon\carbon;
 class SubcategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checkrole');
+    }
     function subcategory(){
         $categories = Category::all();
         return view('subcategory.index',compact('categories'));

@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('tohoney_assets/css/styles.css') }}">
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('tohoney_assets/css/responsive.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- modernizr css -->
     <script src="{{ asset('tohoney_assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 </head>
@@ -75,17 +76,25 @@
                     </div>
                     <div class="col-md-6 col-12">
                         <ul class="d-flex account_login-area">
+
+                            @auth
                             <li>
-                                <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
+                                <a href="javascript:void(0);"><i class="fa fa-user"></i> {{ Auth::user()->name }}<i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown_style">
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">wishlist</a></li>
+                                    <li><a href="{{ route('home') }}">Dashbord</a></li>
+                                    <li>
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();"><i class="icon ion-power"></i> Log Out</a>
+                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a href="register.html"> Login/Register </a></li>
+                            @else
+                            <li><a href="{{ route('customer_login') }}"> Login/Register </a></li>
+                            @endauth
+                        
                         </ul>
                     </div> 
                 </div>
@@ -401,6 +410,8 @@
     <script src="{{ asset('tohoney_assets/js/jquery-ui.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('tohoney_assets/js/scripts.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    @yield('footer_scripts')
 </body>
 
 
