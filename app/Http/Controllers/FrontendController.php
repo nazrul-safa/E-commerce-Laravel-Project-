@@ -11,6 +11,7 @@ use App\Models\Tes;
 use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Country;
+use App\Models\City;
 use Carbon\Carbon;
 use Hash;
 use Auth;
@@ -34,8 +35,8 @@ class FrontendController extends Controller
         return view('user');
     }
     function product_details($product_id){
-        $product_category_id = Product::find($product_id)->category_id;
-        $product_info = Product::find($product_id);
+        $product_category_id = Product::findorfail($product_id)->category_id;
+        $product_info = Product::findorfail($product_id);
         $related_product = Product::where('category_id',$product_category_id)->where('id','!=',$product_id)->get();
         $faq_info= Faq::all();
         return view('product.details',compact('product_info','faq_info','related_product'));
@@ -48,7 +49,7 @@ class FrontendController extends Controller
     }
     function categorywise($category_id){
         $products = Product::where('category_id',$category_id)->get();
-        $category_name = Category::find($category_id);
+        $category_name = Category::findorfail($category_id);
         return view('categorywise',compact('products','category_name'));
     }
 
@@ -99,6 +100,7 @@ class FrontendController extends Controller
     }
     function checkout(){
         $countries= Country::select('id','name')->get();
+        //$cities= City::select('id','name')->get();
         return view('checkout',compact('countries'));
     }
     function customer_register(){
@@ -115,13 +117,10 @@ class FrontendController extends Controller
         return back();
     }
     function customer_login(){
-        
         return view('customer_login');
     }
-    function customer_login_post(Request $req){
-        
-        
- //return $req->password;
+
+    function customer_login_post(Request $req){    
        if( User::where('email',$req->email)->exists()){
            $db_password =  User::where('email',$req->email)->first()->password;
            if (Hash::check($req->password, $db_password)) {
@@ -137,6 +136,23 @@ class FrontendController extends Controller
        else{
            return back()->with('customer_login_error','Email Not Found');
        }
+    }
+
+    function getcitylist(Request $req){
+        $str_to_send = "";
+        foreach (City::where('country_id',$req->country_id)->select('id','name')->get() as $city) {
+            $str_to_send = $str_to_send. "<option value='".$city->id."'>$city->name</option>" ;
+        }
+        echo $str_to_send;
+    }
+    function checkoutpost(Request $req){
+        
+        if($req->payment_option==1){
+            echo "Cash on card";
+        }
+        else{
+            echo "Cash on Delevery";
+        }
     }
      
 } 

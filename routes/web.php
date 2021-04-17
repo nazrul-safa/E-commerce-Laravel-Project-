@@ -23,10 +23,12 @@ Route::get('cart',[FrontendController::class, 'cart'])->name('cart');
 Route::post('update/cart',[FrontendController::class, 'updatecart'])->name('updatecart');
 Route::get('cart/{coupon_name}',[FrontendController::class, 'cart'])->name('cartwithcoupon');
 Route::get('checkout',[FrontendController::class, 'checkout'])->name('checkout');
+Route::post('checkout/post',[FrontendController::class, 'checkoutpost'])->name('checkoutpost');
 Route::get('customer/register',[FrontendController::class, 'customer_register'])->name('customer_register');
 Route::post('customer/register/post',[FrontendController::class, 'customer_post'])->name('customer_post');
 Route::get('customer/login',[FrontendController::class, 'customer_login'])->name('customer_login');
 Route::post('customer/login/post',[FrontendController::class, 'customer_login_post'])->name('customer_login_post');
+Route::post('get/city/list',[FrontendController::class, 'getcitylist']);
 
 //route of contact controller
 Route::get('contact',[ContactController::class, 'contact'])->name('tohoney_contact');

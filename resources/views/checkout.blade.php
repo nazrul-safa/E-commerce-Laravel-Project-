@@ -31,23 +31,24 @@
                         <h3>Billing Details
                             (Loggin as: {{ Auth::user()->name }})
                         </h3>
-                        <form action="" method="">
+                        <form action="{{ route('checkoutpost') }}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <p>Name *</p>
-                                    <input type="text" value="{{ Auth::user()->name }}">
+                                    <input type="text" value="{{ Auth::user()->name }}" name="customer_name">
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Email Address *</p>
-                                    <input type="email" value="{{ Auth::user()->email }}">
+                                    <input type="email" value="{{ Auth::user()->email }}" name="customer_email">
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Phone No. *</p>
-                                    <input type="text">
+                                    <input type="text" name="customer_phone">
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Country *</p>
-                                    <select id="country_list">
+                                    <select id="country_list" name="customer_country">
                                         <option value="">--Select One--</option>
                                         @foreach ($countries as $country)
                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -56,28 +57,24 @@
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>City *</p>
-                                    <select>
-                                        <option value="">Dhaka</option>
+                                    <select id="city_list" name="customer_city">
+                                        <option value="">--Select One--</option>
                                     </select>
                                 </div>                                
-                                <div class="col-12">
-                                    <p>Your Address *</p>
-                                    <input type="text">
+                                <div class="col-sm-6 col-12">
+                                    <p>Your Address</p>
+                                    <input type="text" name="customer_address">
                                 </div>
                                 <div class="col-sm-6 col-12">
-                                    <p>Postcode/ZIP</p>
-                                    <input type="email">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Town/City *</p>
-                                    <input type="text">
+                                    <p>Postcode/ZIP *</p>
+                                    <input type="text" name="customer_postcode">
                                 </div>                     
                                 <div class="col-12">
                                     <p>Order Notes </p>
-                                    <textarea name="massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
+                                    <textarea name="customer_massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
                                 </div>
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -94,15 +91,16 @@
                         </ul>
                         <ul class="payment-method">                            
                             <li>
-                                <input id="card" type="radio" name="payment_option">
+                                <input id="card" type="radio" name="payment_option" value="1" class="checked">
                                 <label for="card">Credit Card</label>
                             </li>
                             <li>
-                                <input id="delivery" type="radio" name="payment_option">
+                                <input id="delivery" type="radio" name="payment_option" value="2">
                                 <label for="delivery">Cash on Delivery</label>
                             </li>
                         </ul>
-                        <button>Place Order</button>
+                        <button type="submit">Place Order</button>
+                    </form>
                     </div>
                 </div>
             </div>
@@ -147,6 +145,24 @@
     <script>
         $(document).ready(function() {
         $('#country_list').select2();
+        $('#city_list').select2();
+        $('#country_list').change(function(){
+            var country_id = $(this).val();
+            $.ajaxSetup({
+            headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                type: 'POST',
+                url: 'get/city/list',
+                data: {country_id:country_id},
+                success: function(data){
+                    $('#city_list').html(data);
+                }
+            });
+
+        });
 });
     </script>
 @endsection
