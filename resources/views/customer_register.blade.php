@@ -29,13 +29,22 @@
                         @csrf
                         <div class="account-form form-style">
                             <p> Name *</p>
-                            <input type="text" name="name">
+                            <input type="text" name="name" value="{{ old('name') }}">
+                            @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <p> Email Address *</p>
-                            <input type="email" name="email">
+                            <input type="email" name="email" value="{{ old('email') }}">
+                            @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <p>Password *</p>
-                            <input type="Password" name="password">
+                            <input type="Password" name="password" value="{{ old('password') }}">
+                            @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             <p>Confirm Password *</p>
-                            <input type="Password" name="confirm_password">
+                            <input type="Password" name="confirm_password" value="{{ old('confirm_password') }}">
                             <button>Register</button>
                             <div class="text-center">
                                 <a href="{{ route('customer_login') }}">Or Login</a>

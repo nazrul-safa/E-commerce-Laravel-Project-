@@ -37,41 +37,62 @@
                                 <div class="col-12">
                                     <p>Name *</p>
                                     <input type="text" value="{{ Auth::user()->name }}" name="customer_name">
+                                    @error('customer_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Email Address *</p>
-                                    <input type="email" value="{{ Auth::user()->email }}" name="customer_email">
+                                    <input type="email" value="{{ Auth::user()->email }}" name="customer_email" >
+                                    @error('customer_email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Phone No. *</p>
-                                    <input type="text" name="customer_phone">
+                                    <input type="text" name="customer_phone" value="{{ old('customer_phone') }}">
+                                    @error('customer_phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Country *</p>
-                                    <select id="country_list" name="customer_country">
+                                    <select id="country_list" name="customer_country" value="{{ old('customer_country') }}">
                                         <option value="">--Select One--</option>
                                         @foreach ($countries as $country)
                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('customer_country')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>City *</p>
-                                    <select id="city_list" name="customer_city">
+                                    <select id="city_list" name="customer_city" value="{{ old('customer_city') }}">
                                         <option value="">--Select One--</option>
                                     </select>
+                                    @error('customer_city')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>                                
                                 <div class="col-sm-6 col-12">
                                     <p>Your Address</p>
-                                    <input type="text" name="customer_address">
+                                    <input type="text" name="customer_address" value="{{ old('customer_address') }}">
+                                    @error('customer_address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Postcode/ZIP *</p>
-                                    <input type="text" name="customer_postcode">
+                                    <input type="text" name="customer_postcode" value="{{ old('customer_postcode') }}">
+                                    @error('customer_postcode')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>                     
                                 <div class="col-12">
                                     <p>Order Notes </p>
-                                    <textarea name="customer_massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
+                                    <textarea name="customer_massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery" value="{{ old('customer_massage') }}"></textarea>
                                 </div>
                             </div>
                         
@@ -98,6 +119,9 @@
                                 <input id="delivery" type="radio" name="payment_option" value="2">
                                 <label for="delivery">Cash on Delivery</label>
                             </li>
+                            @error('payment_option')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </ul>
                         <button type="submit">Place Order</button>
                     </form>

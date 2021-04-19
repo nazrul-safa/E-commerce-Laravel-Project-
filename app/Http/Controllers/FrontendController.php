@@ -12,6 +12,8 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Country;
 use App\Models\City;
+use App\Models\Order;
+use App\Models\Order_details;
 use Carbon\Carbon;
 use Hash;
 use Auth;
@@ -107,10 +109,18 @@ class FrontendController extends Controller
         return view('customer_register');
     }
     function customer_post(Request $req){
+        $req->validate(
+            [
+            'name' => ['required','max:40'],
+            'email' => ['required','unique:users','email'],
+            'password' => ['required','confirmed'],
+           
+            ]);
         User::insert([
             'name' => $req->name,
             'email' => $req->email,
-            'password' => bcrypt($req->password),
+            'password' => Hash::make($req->password),   //bcrypt($req->password),
+            'password' => Hash::make($req->confirm_password),   //bcrypt($req->password),
             'role' => 2,
             'created_at' => Carbon::now()
         ]);
@@ -146,12 +156,42 @@ class FrontendController extends Controller
         echo $str_to_send;
     }
     function checkoutpost(Request $req){
-        
+        $req->validate(
+            [
+            'customer_name' => ['required','string','max:40'],
+            'customer_email' => ['required','string','max:40'],
+            'customer_phone' => ['required'],
+            'customer_country' => ['required'],
+            'customer_city' => ['required'],
+            'customer_address' => ['required'],
+            'customer_postcode' => ['required'],
+            'payment_option' => ['required'],
+            ]);
         if($req->payment_option==1){
             echo "Cash on card";
         }
         else{
-            echo "Cash on Delevery";
+            $order_id = Order::insertGetId($req->except('_token')+[
+                'user_id' => Auth::id(),
+                'payment_status' => 1,
+                'discount' => session('session_coupon_discount'),
+                'discount_in_amount' => session('session_coupon_discount_in_amount'),
+                'subtotal' => session('session_subtotal'),
+                'total' => session('session_total'),
+                'created_at'=> Carbon::now()
+            ]);
+           $carts = Cart::where('ip_address',request()->ip())->select('id','product_id','quantity')->get();
+           foreach($carts as $cart){
+               Order_details::insert([
+                'order_id' => $order_id,
+                'product_id' =>$cart->product_id,
+                'quantity' => $cart->quantity,
+                'created_at'=> Carbon::now(),
+            ]);
+            Product::find($cart->product_id)->decrement('product_quantity',$cart->quantity);
+            Cart::find($cart->id)->delete();   
+        } 
+           echo "done";
         }
     }
      
