@@ -52,6 +52,7 @@ Route::post('category/check/delete',[CategoryController::class, 'category_check_
 //route of Subcategory controller
 Route::get('subcategory',[SubcategoryController::class, 'subcategory'])->name('subcategory');
 Route::post('subcategory/post',[SubcategoryController::class, 'subcategory_post'])->name('subcategory_post');
+Route::post('get/subcategory/post',[SubcategoryController::class,'subcategory_get_data']);
 
 //route of product controller
 Route::get('product',[ProductController::class, 'product'])->name('product');
@@ -73,6 +74,7 @@ Route::get('tes/delete/{tes_id}',[TesController::class, 'tes_delete']);
 Auth::routes(); 
 //route of home controller
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('download/invoice/{order_id}', [App\Http\Controllers\HomeController::class, 'download_invoice'])->name('download_invoice');
  
 //route of Setting controller
 Route::get('setting',[SettingController::class, 'setting'])->name('setting');

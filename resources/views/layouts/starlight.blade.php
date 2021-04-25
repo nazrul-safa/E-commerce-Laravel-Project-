@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel </title>
 
     <!-- vendor css -->
@@ -14,6 +15,7 @@
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('starlight/css/starlight.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -151,6 +153,7 @@
     <script src="{{ asset('starlight/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>
 
     <script src="{{ asset('starlight/js/starlight.js')}}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    @yield('footer_scripts')
   </body>
 </html>

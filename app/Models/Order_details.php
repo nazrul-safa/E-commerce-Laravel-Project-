@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order_details extends Model
 {
     use HasFactory;
+    function reltoproducttable(){
+        return $this->hasone(Product::class,'id','product_id');
+    }
 }

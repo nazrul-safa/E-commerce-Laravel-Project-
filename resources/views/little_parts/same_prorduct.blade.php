@@ -8,7 +8,7 @@
                 <ul>
                     <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
                     <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+                    <li><a href="{{ route('cart') }} "><i class="fa fa-shopping-bag"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -27,3 +27,56 @@
         </div>
     </div>
 </li>
+ <!-- Modal area start -->
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body d-flex">
+                <div class="product-single-img w-50">
+                    <img src="{{ asset('photo') }}/product/{{ $product->product_photo }}" alt="">
+                </div>
+                <div class="product-single-content w-50">
+                    <h3>
+                        {{ $product->product_name }}
+                    </h3>
+                    <div class="rating-wrap fix">
+                        <span class="pull-left">${{$product->product_price }}</span>
+                    </div>
+                     <p>{{ $product->product_short_description }}</p>
+                    <form action="{{ route('addtocart', $product->id) }}" method="POST">
+                            @csrf
+                            <ul class="input-style">
+                                <li class="quantity cart-plus-minus">
+                                    <input type="text" value="1" name="quantity" />
+                                </li>
+                                <li>
+                                    <button class="btn btn-primary">Add to cart</button>
+                                </li>
+                            </ul>
+                        </form>
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    <ul class="cetagory">
+                        <li>Categories:</li>
+                        <li><a href="#">{{ App\Models\Category::find($product->category_id)->category_name }}</a></li>
+                    </ul>
+                    <ul class="socil-icon">
+                        <li>Share :</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal area start -->

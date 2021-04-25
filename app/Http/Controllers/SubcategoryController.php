@@ -26,4 +26,11 @@ class SubcategoryController extends Controller
         ]);
         return back();
     }
+    function subcategory_get_data(Request $req){
+        $str_to_send = "";
+        foreach (Subcategory::where('category_id',$req->category_id)->select('id','subcategory_name')->get() as $subcategory) {
+            $str_to_send = $str_to_send. "<option value='".$subcategory->id."'>$subcategory->subcategory_name</option>" ;
+        }
+        echo $str_to_send;
+    }
 }

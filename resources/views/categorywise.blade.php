@@ -1,4 +1,5 @@
 @extends('layouts.tohoney')
+
 @section('title')
    Categorywise
 @endsection
@@ -38,4 +39,5 @@
         </div>      
     </div>
     <!-- product-area end -->   
+ 
 @endsection

@@ -13,7 +13,7 @@
   </nav>
 @endsection
 @section('content')
-<h2>Role: {{ Auth::user()->role }}</h2>
+{{-- <h2>Role: {{ Auth::user()->role }}</h2> --}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -55,15 +55,7 @@
                 </div>
             </div>
             @else
-                <div class="card">
-                    <div class="card-header">
-                        Hello customer
-                    </div>
-                    <div class="card-body">
- 
-                    </div>
-                    
-                </div>
+                @include('customer_dashbord')
             @endif
            
         </div>

@@ -290,4 +290,5 @@
         </div>
     </div>
     <!-- featured-product-area end -->
+    
 @endsection

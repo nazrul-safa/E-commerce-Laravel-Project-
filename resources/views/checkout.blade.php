@@ -150,12 +150,14 @@
              <div class="container">
                  <div class="row">
                      <div class="col-12">
-                         <div class="alert alert-danger">
-                            YOU ARE  looged in
+                         <div class="alert alert-danger" style="text-align: center"  >
+                            <h2>You are not logged in</h2>
                             <br>
-                             If you have already an account
-                             <a href="{{ route('customer_login') }}">Login Here</a>
-                             To Open a new Account <a href="{{ route('customer_register') }}">Register Here</a>
+                             <h5>If you have already an account</h5>
+                             <h5><a href="{{ route('customer_login') }}">Login Here</a></h5>
+                             <br>
+                             <h5>To Open a new Account </h5>
+                             <h5><a href="{{ route('customer_register') }}">Register Here</a></h5>
                             </div>
                      </div>
                 </div>     

@@ -44,7 +44,7 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                             <p>Confirm Password *</p>
-                            <input type="Password" name="confirm_password" value="{{ old('confirm_password') }}">
+                            <input type="Password" name="password_confirmation" value="{{ old('password_confirmation') }}">
                             <button>Register</button>
                             <div class="text-center">
                                 <a href="{{ route('customer_login') }}">Or Login</a>

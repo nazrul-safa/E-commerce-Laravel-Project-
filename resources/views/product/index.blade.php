@@ -63,7 +63,6 @@
                                 <a href="{{ url('product/edit') }}/{{ $product->id }}" type="button" class="btn btn-info">Edit</a>
                                 <a href="{{ url('product/delete') }}/{{ $product->id }}" type="button" class="btn btn-danger">Delete</a>
                                 {{-- <a href="{{ route('product_edit')}}/{{ $product->id }}" type="button" class="btn btn-info">Edit</a> --}}
-                             
                               </div>
                             </td>
                           </tr>   
@@ -78,7 +77,6 @@
                     </table>
                 </div>   
         </div>
-     
     </div>
     <div class="col-6 m-auto" >
             <div class="card-header">Add Product</div>
@@ -87,7 +85,7 @@
                     @csrf 
                     <div class="form-group">
                         <label>Category Name</label>
-                        <select class="form-control" name="category_id">
+                        <select id="category_list" class="form-control" name="category_id">
                            <option value="">-Choose One-</option>
                            @foreach ($category_data as $category)
                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
@@ -96,11 +94,8 @@
                     </div>
                     <div class="form-group">
                         <label>Sub Category Name</label>
-                        <select class="form-control" name="subcategory_id">
+                        <select id="subcategory_list" class="form-control" name="subcategory_id">
                            <option value="">-Choose One-</option>
-                           @foreach ($subcategory_data as $subcategory)
-                           <option value="{{ $subcategory->id }}">{{ App\Models\Category::find($subcategory->category_id)->category_name }}>{{ $subcategory->subcategory_name }}</option>
-                           @endforeach
                         </select>
                     </div>
                     <div class="form-group">
@@ -157,28 +152,26 @@
 </div>
 @endsection
 @section('footer_scripts')
-{{-- <script>
-  $(document).ready (function(){
-    $('#delete_all_btn').click(function(){
-      Swal.fire({
-        title: 'Are you sure You want to Delete all?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href= "category/all/delete";
-        }
-      })
-    }) 
-     $('#check_all_btn').click(function(){
-       $('.delete_checkbox').attr('checked','checked');
-     });
-     $('#uncheck_all_btn').click(function(){
-       $('.delete_checkbox').removeAttr('checked');
-     });
-  });
-</script> --}}
+    <script>
+        $(document).ready(function() {
+        $('#category_list').select2();
+        $('#subcategory_list').select2();
+        $('#category_list').change(function(){
+            var category_id = $(this).val();
+            $.ajaxSetup({
+            headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                type: 'POST',
+                url: 'get/subcategory/post',
+                data: {category_id:category_id},
+                success: function(data){
+                    $('#subcategory_list').html(data);
+                }
+            });
+        });
+});
+</script>
 @endsection

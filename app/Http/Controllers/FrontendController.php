@@ -20,7 +20,6 @@ use Auth;
 class FrontendController extends Controller
 {
     function home(){
-    
         $categories = Category::all();
         $tes_info = Tes::all();
         $products = Product::latest()->get();
@@ -52,7 +51,9 @@ class FrontendController extends Controller
     function categorywise($category_id){
         $products = Product::where('category_id',$category_id)->get();
         $category_name = Category::findorfail($category_id);
-        return view('categorywise',compact('products','category_name'));
+        //$product_info = Product::findorfail($product_id);
+        $product_info = Product::findorfail($category_id);
+        return view('categorywise',compact('products','category_name','product_info'));
     }
 
     function contact_get(){
@@ -109,22 +110,27 @@ class FrontendController extends Controller
         return view('customer_register');
     }
     function customer_post(Request $req){
-        $req->validate(
-            [
+        $req->validate([
             'name' => ['required','max:40'],
             'email' => ['required','unique:users','email'],
-            'password' => ['required','confirmed'],
-           
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6',
             ]);
         User::insert([
             'name' => $req->name,
             'email' => $req->email,
-            'password' => Hash::make($req->password),   //bcrypt($req->password),
-            'password' => Hash::make($req->confirm_password),   //bcrypt($req->password),
+            'password' => bcrypt($req->password),
             'role' => 2,
             'created_at' => Carbon::now()
         ]);
-        return back();
+        if( User::where('email',$req->email)->exists()){
+            $db_password =  User::where('email',$req->email)->first()->password;
+            if (Hash::check($req->password, $db_password)) {
+                if(Auth::attempt($req->except('_token'))){
+                    return redirect('/');
+                } 
+            }
+        }
     }
     function customer_login(){
         return view('customer_login');
@@ -135,9 +141,8 @@ class FrontendController extends Controller
            $db_password =  User::where('email',$req->email)->first()->password;
            if (Hash::check($req->password, $db_password)) {
              if(Auth::attempt($req->except('_token'))){
-                 return redirect()->intended('home');
+                 return redirect('/');
              }  
-            //return view('customer_dashbord');
            }
            else{
                return back()->with('customer_login_error','Your email or password is incorrect');
@@ -147,7 +152,6 @@ class FrontendController extends Controller
            return back()->with('customer_login_error','Email Not Found');
        }
     }
-
     function getcitylist(Request $req){
         $str_to_send = "";
         foreach (City::where('country_id',$req->country_id)->select('id','name')->get() as $city) {
@@ -191,7 +195,7 @@ class FrontendController extends Controller
             Product::find($cart->product_id)->decrement('product_quantity',$cart->quantity);
             Cart::find($cart->id)->delete();   
         } 
-           echo "done";
+           return redirect("home");
         }
     }
      

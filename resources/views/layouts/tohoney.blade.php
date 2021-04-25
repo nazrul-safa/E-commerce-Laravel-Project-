@@ -126,33 +126,32 @@
                         <ul class="search-cart-wrapper d-flex">
                             <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a></li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>2</span></a>
+                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>{{ App\Models\Cart::where('ip_address',request()->ip())->count() }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
+                                    @php
+                                       $carts = App\Models\Cart::where('ip_address',request()->ip())->get();
+                                       $subtotal = 0;
+                                   @endphp
+                                    @foreach ($carts as $cart)
                                     <li class="cart-items">
                                         <div class="cart-img">
-                                            <img src="{{ asset('tohoney_assets') }}/images/cart/1.jpg" alt="">
+                                            <img src="{{ asset('photo') }}/product/{{  App\Models\Product::find($cart->product_id)->product_photo }}" alt="" width="50">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
+                                            <a href="cart.html"> {{  App\Models\Product::find($cart->product_id)->product_name }}</a>
+                                            <span>QTY : {{ $cart->quantity }}</span>
+                                            <p>${{  App\Models\Product::find($cart->product_id)->product_price * $cart->quantity}}</p>
                                             <i class="fa fa-times"></i>
+                                            @php
+                                                $subtotal += App\Models\Product::find($cart->product_id)->product_price * $cart->quantity
+                                            @endphp
                                         </div>
                                     </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('tohoney_assets') }}/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                    @endforeach
+                                    
+                                    <li>Subtotol: <span class="pull-right">${{ $subtotal }}</span></li>
                                     <li>
-                                        <button>Check Out</button>
+                                        <a href="{{ route('checkout') }}" class="btn btn-info">Check Out</a>
                                     </li>
                                 </ul>
                             </li>
@@ -170,7 +169,7 @@
                                             <img src="{{ asset('photo') }}/product/{{  App\Models\Product::find($cart->product_id)->product_photo }}" alt="" width="50">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="cart.html">
+                                            <a href="">
                                                 {{  App\Models\Product::find($cart->product_id)->product_name }}
                                             </a>
                                             <span>QTY : {{ $cart->quantity }}</span>
@@ -334,56 +333,7 @@
         </div>
     </div>
     <!-- .footer-area end -->
-    <!-- Modal area start -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal-body d-flex">
-                    <div class="product-single-img w-50">
-                        <img src="{{ asset('tohoney_assets') }}/images/product/product-details.jpg" alt="">
-                    </div>
-                    <div class="product-single-content w-50">
-                        <h3>Pure Nature Hohey</h3>
-                        <div class="rating-wrap fix">
-                            <span class="pull-left">$219.56</span>
-                            <ul class="rating pull-right">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li>(05 Customar Review)</li>
-                            </ul>
-                        </div>
-                        <p> {{ App\Models\Setting::where('setting_name','footer_des')->first()->setting_value }}</p>
-                        <ul class="input-style">
-                            <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
-                            </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
-                        </ul>
-                        <ul class="cetagory">
-                            <li>Categories:</li>
-                            <li><a href="#">Honey,</a></li>
-                            <li><a href="#">Olive Oil</a></li>
-                        </ul>
-                        <ul class="socil-icon">
-                            <li>Share :</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal area start -->
+      
     <!-- jquery latest version -->
    
     <script src="{{ asset('tohoney_assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
