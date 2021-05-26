@@ -11,6 +11,7 @@ use App\Http\Controllers\TesController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\SslCommerzPaymentController;
 
 //route of frontend controller
 Route::get('/',[FrontendController::class, 'home'])->name('tohoney_home');
@@ -75,6 +76,7 @@ Auth::routes();
 //route of home controller
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('download/invoice/{order_id}', [App\Http\Controllers\HomeController::class, 'download_invoice'])->name('download_invoice');
+Route::post('send/sms', [App\Http\Controllers\HomeController::class, 'sendsms'])->name('sendsms');
  
 //route of Setting controller
 Route::get('setting',[SettingController::class, 'setting'])->name('setting');
@@ -87,5 +89,19 @@ Route::get('cart/delete/{cart_id}',[CartController::class, 'cartdelete'])->name(
 
 //route of Coupon controller
 Route::resource('coupon',CouponController::class);
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('onlin/epayment', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 
 

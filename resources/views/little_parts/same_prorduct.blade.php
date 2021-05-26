@@ -53,7 +53,7 @@
                                     <input type="text" value="1" name="quantity" />
                                 </li>
                                 <li>
-                                    <button class="btn btn-primary">Add to cart</button>
+                                    <input type="submit" class="text-white bg-danger border-0 addtocart"  style="padding: 5.5px 10px" value="Add to cart" min="1" onclick="ShowDiv()">
                                 </li>
                             </ul>
                         </form>

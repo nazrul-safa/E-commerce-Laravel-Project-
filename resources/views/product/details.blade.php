@@ -84,11 +84,8 @@
                         </ul>
                         <ul class="socil-icon">
                             <li>Share :</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="http://www.facebook.com/sharer/sharer.php?u={{ url()->full() }}_HERE&t=safa" target="_blank" class="share-popup"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="http://www.twitter.com/intent/tweet?url=URL_HERE&via=TWITTER_HANDLE_HERE&text=TITLE_HERE" target="_blank" class="share-popup"><i class="fa fa-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>

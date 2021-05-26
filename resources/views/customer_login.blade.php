@@ -31,6 +31,13 @@
                         {{ session('customer_login_error') }}
                     </div>
                 @endif
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('customer_login_post') }}" method="post">
                     @csrf
                     <div class="account-form form-style">

@@ -12,7 +12,7 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Country;
 use App\Models\City;
-use App\Models\Order;
+use App\Models\Cartorder;
 use App\Models\Order_details;
 use Carbon\Carbon;
 use Hash;
@@ -172,10 +172,11 @@ class FrontendController extends Controller
             'payment_option' => ['required'],
             ]);
         if($req->payment_option==1){
-            echo "Cash on card";
+            // return view('onlinepayment');
+            return redirect()->route('sslpay');
         }
         else{
-            $order_id = Order::insertGetId($req->except('_token')+[
+            $order_id = Cartorder::insertGetId($req->except('_token')+[
                 'user_id' => Auth::id(),
                 'payment_status' => 1,
                 'discount' => session('session_coupon_discount'),

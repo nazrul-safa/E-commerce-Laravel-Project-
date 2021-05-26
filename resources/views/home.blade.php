@@ -24,6 +24,28 @@
                 </div>
 
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div>
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                               <form action="{{ url('send/sms') }}" method="post">
+                                @csrf
+                                   <label for="">Numbers (Seperate by ,)</label>
+                                   <textarea class="form-control" name="number" id="" rows="3"></textarea>
+                                   <label for="">Messages</label>
+                                   <textarea class="form-control" name="message" id="" rows="3"></textarea>
+                                   <button class="mt-3 btn btn-success">Send</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -61,4 +83,38 @@
         </div>
     </div>
 </div>
+@endsection
+@section('footer_scripts') 
+      <script>
+        // === include 'setup' then 'config' above ===
+                        const labels = [
+                'Cash On Delvery',
+            'Credit Card',
+                ];
+                const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 205, 86)'
+                ],
+                    borderColor: '#2e2e2e',
+                     data: [{{ $creditcard }}, {{ $cod }}],
+                }]
+                };
+                const config = {
+                type: 'pie',
+                data,
+                options: {}
+                };
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>    
+
+
+
 @endsection

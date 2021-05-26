@@ -31,7 +31,7 @@
                         <h3>Billing Details
                             (Loggin as: {{ Auth::user()->name }})
                         </h3>
-                        <form action="{{ route('checkoutpost') }}" method="POST">
+                        <form id="main_form" action="{{ route('checkoutpost') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -123,7 +123,7 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </ul>
-                        <button type="submit">Place Order</button>
+                        <button type="button" id="place_order">Place Order</button>
                     </form>
                     </div>
                 </div>
@@ -187,7 +187,16 @@
                     $('#city_list').html(data);
                 }
             });
-
+        });
+        $('#place_order').click(function(){
+            if($("input[name='payment_option']:checked").val()==1){
+                var link = "{{ url('pay') }}"
+                $('#main_form').attr('action',link);
+            }
+            else{
+                $('#main_form').attr('action','http://127.0.0.1:8000/checkout/post');                
+            }
+            $("#main_form").submit();
         });
 });
     </script>
