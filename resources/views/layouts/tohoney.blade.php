@@ -48,8 +48,8 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 col-12">
                     <div class="search-form">
-                        <form action="#">
-                            <input type="text" placeholder="Search Here...">
+                        <form action="{{ url('search') }}">
+                            <input type="text" name="s" placeholder="Search Here...">
                             <button><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -117,7 +117,6 @@
                                 <li class="active"><a href="{{ route('tohoney_home') }}">Home</a></li>
                                 <li><a href="{{ route('tohoney_about') }}">About</a></li>
                                 <li><a href="{{ route('shop') }}">Shop</a></li>
-                                <li><a href="{{ route('tohoney_about') }}">Blog</a></li>
                                 <li><a href="{{ route('tohoney_contact') }}">Contact</a></li>
                             </ul>
                         </nav>
@@ -125,6 +124,8 @@
                     <div class="col-md-4 col-lg-2 col-sm-5 col-4">
                         <ul class="search-cart-wrapper d-flex">
                             <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a></li>
+                            
+                            
                             <li>
                                 <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>{{ App\Models\Cart::where('ip_address',request()->ip())->count() }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
@@ -138,9 +139,9 @@
                                             <img src="{{ asset('photo') }}/product/{{  App\Models\Product::find($cart->product_id)->product_photo }}" alt="" width="50">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="cart.html"> {{  App\Models\Product::find($cart->product_id)->product_name }}</a>
+                                            <a href="{{ url('product/details')}}/{{ $cart->product_id }} "> {{  App\Models\Product::find($cart->product_id)->product_name }}</a>
                                             <span>QTY : {{ $cart->quantity }}</span>
-                                            <p>${{  App\Models\Product::find($cart->product_id)->product_price * $cart->quantity}}</p>
+                                            <p>${{  App\Models\Product::find($cart->product_id)->product_price * $cart->quantity }}</p>
                                             <i class="fa fa-times"></i>
                                             @php
                                                 $subtotal += App\Models\Product::find($cart->product_id)->product_price * $cart->quantity
@@ -148,13 +149,14 @@
                                         </div>
                                     </li>
                                     @endforeach
-                                    
                                     <li>Subtotol: <span class="pull-right">${{ $subtotal }}</span></li>
                                     <li>
                                         <a href="{{ route('checkout') }}" class="btn btn-info">Check Out</a>
                                     </li>
                                 </ul>
                             </li>
+
+
                             <li>
                                 <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>{{ App\Models\Cart::where('ip_address',request()->ip())->count() }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
@@ -169,7 +171,7 @@
                                             <img src="{{ asset('photo') }}/product/{{  App\Models\Product::find($cart->product_id)->product_photo }}" alt="" width="50">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="">
+                                            <a href="{{ url('product/details')}}/{{ $cart->product_id }}">
                                                 {{  App\Models\Product::find($cart->product_id)->product_name }}
                                             </a>
                                             <span>QTY : {{ $cart->quantity }}</span>
@@ -210,37 +212,10 @@
                     <div class="row">
                         <div class="col-12 d-block d-lg-none">
                             <ul class="metismenu">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li class="sidemenu-items">
-                                    <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Shop </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="shop.html">Shop Page</a></li>
-                                        <li><a href="single-product.html">Product Details</a></li>
-                                        <li><a href="cart.html">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                    </ul>
-                                </li>
-                                <li class="sidemenu-items">
-                                    <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Pages </a>
-                                    <ul aria-expanded="false">
-                                      <li><a href="about.html">About Page</a></li>
-                                      <li><a href="single-product.html">Product Details</a></li>
-                                      <li><a href="cart.html">Shopping cart</a></li>
-                                      <li><a href="checkout.html">Checkout</a></li>
-                                      <li><a href="wishlist.html">Wishlist</a></li>
-                                      <li><a href="faq.html">FAQ</a></li>
-                                    </ul>
-                                </li>
-                                <li class="sidemenu-items">
-                                    <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Blog</a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li class="active"><a href="{{ route('tohoney_home') }}">Home</a></li>
+                                <li><a href="{{ route('tohoney_about') }}">About</a></li>
+                                <li><a href="{{ route('shop') }}">Shop</a></li>
+                                <li><a href="{{ route('tohoney_contact') }}">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -254,7 +229,7 @@
     @yield('body')
 
       <!-- start social-newsletter-section -->
-      <section class="social-newsletter-section">
+      {{-- <section class="social-newsletter-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -271,7 +246,7 @@
             </div>
         </div>
         <!-- end container -->
-    </section>
+    </section> --}}
     <!-- end social-newsletter-section -->
     <!-- .footer-area start -->
     <div class="footer-area">
@@ -282,11 +257,10 @@
                         <div class="col-lg-12 col-12">
                             <div class="footer-top-text text-center">
                                 <ul>
-                                    <li><a href="home.html">home</a></li>
-                                    <li><a href="#">our story</a></li>
-                                    <li><a href="#">feed shop</a></li>
-                                    <li><a href="blog.html">how to eat blog</a></li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li><a href="{{  route('tohoney_home') }}">home</a></li>
+                                    <li><a href="{{ route('tohoney_about') }}">About</a></li>
+                                    <li><a href="{{ route('shop') }}">Shop</a></li>
+                                    <li><a href="{{ route('tohoney_contact') }}">Contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -300,10 +274,10 @@
                     <div class="col-lg-2 col-md-3 col-sm-12">
                         <div class="footer-icon">
                             <ul class="d-flex">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="https://www.facebook.com/nazrul.islam.safa/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://github.com/nazrul-safa" target="_blank"><i class="fa fa-github"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/nazrul-islam-safa-7450a2102/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -324,7 +298,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="footer-reserved">
                             <ul>
-                                <li>Copyright © {{ date('Y') }} Tohoney All rights reserved.</li>
+                                <li>Copyright © {{ date('Y') }} All rights reserved.</li>
                             </ul>
                         </div>
                     </div>

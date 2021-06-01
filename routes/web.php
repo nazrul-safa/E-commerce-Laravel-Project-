@@ -21,6 +21,7 @@ Route::get('product/details/{product_id}',[FrontendController::class, 'product_d
 Route::get('shop',[FrontendController::class, 'shop'])->name('shop');
 Route::get('categorywise/shop/{category_id}',[FrontendController::class, 'categorywise'])->name('categorywise');
 Route::get('cart',[FrontendController::class, 'cart'])->name('cart');
+Route::get('wishlist/{product_id}',[FrontendController::class, 'wishlist'])->name('wishlist');
 Route::post('update/cart',[FrontendController::class, 'updatecart'])->name('updatecart');
 Route::get('cart/{coupon_name}',[FrontendController::class, 'cart'])->name('cartwithcoupon');
 Route::get('checkout',[FrontendController::class, 'checkout'])->name('checkout');
@@ -30,6 +31,7 @@ Route::post('customer/register/post',[FrontendController::class, 'customer_post'
 Route::get('customer/login',[FrontendController::class, 'customer_login'])->name('customer_login');
 Route::post('customer/login/post',[FrontendController::class, 'customer_login_post'])->name('customer_login_post');
 Route::post('get/city/list',[FrontendController::class, 'getcitylist']);
+Route::get('search',[FrontendController::class, 'search']);
 
 //route of contact controller
 Route::get('contact',[ContactController::class, 'contact'])->name('tohoney_contact');
@@ -76,6 +78,8 @@ Auth::routes();
 //route of home controller
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('download/invoice/{order_id}', [App\Http\Controllers\HomeController::class, 'download_invoice'])->name('download_invoice');
+Route::get('give/review/{order_id}', [App\Http\Controllers\HomeController::class, 'give_review'])->name('give_review');
+Route::post('review/post/{order_details_id}', [App\Http\Controllers\HomeController::class, 'review_post'])->name('review_post');
 Route::post('send/sms', [App\Http\Controllers\HomeController::class, 'sendsms'])->name('sendsms');
  
 //route of Setting controller

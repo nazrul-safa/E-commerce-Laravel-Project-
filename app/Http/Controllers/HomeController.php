@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\User; 
 use App\Models\Cartorder;
 use App\Models\Order_details; 
+use App\Models\Review;
 use Auth;
 use PDF;
 use Carbon\carbon;
@@ -57,6 +58,23 @@ class HomeController extends Controller
             echo $sendstatus = $p[0];
             echo "Done";
         }
+    }
+    function give_review($order_id){
+        
+        return view('give_review', [
+            'order_details' => Order_details::where('order_id',$order_id)->get()
+        ]);
+    }
+    function review_post($order_details_id, Request $request){
+       Review::insert([
+           'product_id' => Order_details::find($order_details_id)->product_id,
+           'user_id' => Auth::id(),
+           'order_details_id' => $order_details_id,
+           'review_text' => $request->review_text,
+           'stars' => $request->stars,
+           'created_at' => Carbon::now()
+       ]);
+       return back();
     }
 }
  

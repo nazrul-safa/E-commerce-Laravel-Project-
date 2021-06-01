@@ -9,15 +9,15 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide overlay">
-                    <div class="single-slider slide-inner" style="background: url({{ asset('tohoney_assets//images/slider/1.jpg') }});">
+                    <div class="single-slider slide-inner" style="background: url({{ asset('tohoney_assets//images/slider/2.jpg') }});">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 col-lg-9 col-12">
                                     <div class="slider-content">
                                         <div class="slider-shape">
-                                            <h2 data-swiper-parallax="-500">Amazing Pure Nature Hohey</h2>
-                                            <p data-swiper-parallax="-400">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</p>
-                                            <a href="shop.html" data-swiper-parallax="-300">Shop Now</a>
+                                            <h2 data-swiper-parallax="-500">Welcome to our Shop</h2>
+                                            <p data-swiper-parallax="-400">Customer satisfaction is our main Goal</p>
+                                            <a href="{{ route('shop') }}" data-swiper-parallax="-300">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -26,15 +26,15 @@
                     </div>
                 </div>  
                 <div class="swiper-slide">
-                    <div class="slide-inner" style="background: url({{ asset('tohoney_assets//images/slider/2.jpg') }});">
+                    <div class="slide-inner" style="background: url({{ asset('tohoney_assets//images/slider/4.jpg') }});">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 col-lg-9 col-12">
                                     <div class="slider-content">
                                         <div class="slider-shape">
-                                            <h2 data-swiper-parallax="-500">Amazing Pure Nature Coconut Oil</h2>
-                                            <p data-swiper-parallax="-400">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</p>
-                                            <a href="shop.html" data-swiper-parallax="-300">Shop Now</a>
+                                            <h2 data-swiper-parallax="-500">Welcome to our Shop</h2>
+                                            <p data-swiper-parallax="-400">Customer satisfaction is our main Goal</p>
+                                            <a href="{{ route('shop') }}" data-swiper-parallax="-300">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -43,15 +43,15 @@
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <div class="slide-inner" style="background: url({{ asset('tohoney_assets//images/slider/3.jpg') }});">
+                    <div class="slide-inner" style="background: url({{ asset('tohoney_assets//images/slider/5.jpg') }});">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 col-lg-9 col-12">
                                     <div class="slider-content">
                                         <div class="slider-shape">
-                                            <h2 data-swiper-parallax="-500">Amazing Pure Nut Oil</h2>
-                                            <p data-swiper-parallax="-400">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</p>
-                                            <a href="shop.html" data-swiper-parallax="-300">Shop Now</a>
+                                            <h2 data-swiper-parallax="-500">Welcome to our Shop</h2>
+                                            <p data-swiper-parallax="-400">Customer satisfaction is our main Goal</p>
+                                            <a href="{{ route('shop') }}" data-swiper-parallax="-300">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-12 text-center">
-                        <h2 class="big">Deal Of the Day <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</span></h2>
+                        <h2 class="big">Deal Of the Day <span>Welcome to our shop. Big surprise is waitng for you. </span></h2>
                     </div>
                     <div class="col-12 col-lg-12 text-center">
                         <div class="count-down-clock text-center">
@@ -120,114 +120,12 @@
                 </div>
             </div>
             <ul class="row">
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{ asset('tohoney_assets') }}/images/product/1.jpg" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="single-product.html">Nature Honey</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{ asset('tohoney_assets') }}/images/product/2.jpg" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="single-product.html">Olive Oil</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{ asset('tohoney_assets') }}/images/product/3.jpg" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="single-product.html">Olive Oil</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{ asset('tohoney_assets') }}/images/product/4.jpg" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="single-product.html">Coconut Oil</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
+                @foreach ($sorted_best_seller as $pro)
+                     @php
+                         $product = App\Models\Product::find($pro->product_id )
+                     @endphp   
+                @include('little_parts.same_prorduct')
+                @endforeach
             </ul>
         </div>
     </div>
@@ -244,11 +142,9 @@
                 </div>
             </div>
             <ul class="row">
-                @foreach ($products as $product)
+                @foreach ($latest_products as $product)
                     @include('little_parts.same_prorduct')
                 @endforeach
-                
-               
                 <li class="col-12 text-center">
                     <a class="loadmore-btn" href="javascript:void(0);">Load More</a>
                 </li>

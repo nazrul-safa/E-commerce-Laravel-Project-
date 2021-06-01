@@ -14,22 +14,32 @@ use App\Models\Country;
 use App\Models\City;
 use App\Models\Cartorder;
 use App\Models\Order_details;
+use App\Models\Review;
 use Carbon\Carbon;
 use Hash;
 use Auth;
+use DB;
 class FrontendController extends Controller
 {
     function home(){
+       $raw_value = Order_details::select('product_id', DB::raw('count(*) as total'))
+        ->groupBy('product_id')
+        ->get();
+        $collection = collect($raw_value);
+        $sorted_best_seller = $collection->sortByDesc('total')->take(4);
         $categories = Category::all();
         $tes_info = Tes::all();
         $products = Product::latest()->get();
-        return view('index',compact('categories','products','tes_info'));
+        $latest_products = Product::latest()->get()->take(8);
+        return view('index',compact('categories','products','tes_info','sorted_best_seller','latest_products'));
     }
     function about(){
-        $name = [
-            "safa", "Arif", "helooooo"
-        ];
-        return view('about', compact('name'));
+        $raw_value = Order_details::select('product_id', DB::raw('count(*) as total'))
+        ->groupBy('product_id')
+        ->get();
+        $collection = collect($raw_value);
+        $sorted_best_seller = $collection->sortByDesc('total')->take(4);
+        return view('about', compact('sorted_best_seller'));
     }
     
     function users(){
@@ -40,7 +50,14 @@ class FrontendController extends Controller
         $product_info = Product::findorfail($product_id);
         $related_product = Product::where('category_id',$product_category_id)->where('id','!=',$product_id)->get();
         $faq_info= Faq::all();
-        return view('product.details',compact('product_info','faq_info','related_product'));
+        $reviews = Review::where('product_id', $product_id)->get();
+        if (Review::where('product_id', $product_id)->exists()) {
+             $overall_reviews = Review::where('product_id', $product_id)->get()->sum('stars')/Review::where('product_id', $product_id)->count();
+        }
+        else{
+            $overall_reviews = 0;
+        }
+        return view('product.details',compact('product_info','faq_info','related_product','reviews','overall_reviews'));
     }
     
     function shop(){
@@ -91,6 +108,13 @@ class FrontendController extends Controller
         $coupon_name;
         return view('cart',compact('carts','coupon_discount','coupon_name'));
     }
+
+    function wishlist($product_id){
+        echo $product_infos = Product::findorfail($product_id);
+          
+        return view('layouts.tohoney',compact('product_infos'));
+    }
+
     function updatecart(Request $req){
         foreach($req->quantity as $cart_id => $quantity){
             if(Product::find(Cart::find($cart_id)->product_id)->product_quantity>=$quantity){
@@ -198,6 +222,14 @@ class FrontendController extends Controller
         } 
            return redirect("home");
         }
+    }
+    function search(){
+        
+        $search_str = "%". $_GET['s'] ."%";
+        $search_products = Product::where('product_name', "LIKE" , $search_str)->get();
+        $all_products = product::inRandomOrder()->get();
+        $categories = Category::all();
+        return view('search',compact('search_products','all_products','categories'));
     }
      
 } 
