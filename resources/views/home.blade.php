@@ -31,6 +31,47 @@
                             </div>
                         </div>
                     </div>
+<br>
+<br>
+                    <div class="alert alert-success">
+                           <h5 class="text-center">All Orders: </h5> 
+                        </div>
+                        <div class="row">
+                             <div class="col-12">
+                                 <div id="main_section_order">
+                                     <div id="main_section_table">
+                                        <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Or N.</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Phone</th>                           
+                                            <th scope="col">Address</th>                            
+                                            <th scope="col">Date</th>                            
+                                            <th scope="col">Total</th>                          
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($customer_order_details as $customer_order_detail)
+                                                <tr> 
+                                                    <td>{{ $loop->index+1 }}</td> 
+                                                    <td>{{ $customer_order_detail->customer_name }}</td>             
+                                                    <td>{{ $customer_order_detail->customer_email }}</td>             
+                                                    <td>{{ $customer_order_detail->customer_phone }}</td>             
+                                                    <td>{{ $customer_order_detail->customer_address }}</td>             
+                                                    <td>{{ $customer_order_detail->created_at->diffForHumans()}}</td>             
+                                                    <td>{{ $customer_order_detail->total }}</td>             
+                                                </tr>
+                                            @endforeach 
+                                        </tbody>
+                                        </table> 
+                                     </div>
+                                 </div>
+                                    
+                                </div>
+                        </div>
+
                     <div class="row">
                         <div class="col-12">
                             <div>
@@ -51,9 +92,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div class="alert alert-success">
-                        Total user: {{ $users->count() }}
+                    <div id="main_section">
+                        <div id="total_user_section" class="alert alert-success">
+                             Total user: {{ $users->count() }}
+                        </div>
                     </div>
+                    
                     <table class="table table-striped">
                         <thead>
                           <tr>
@@ -113,6 +157,15 @@
             document.getElementById('myChart'),
             config
         );
+
+        window.setInterval(function(){
+            $("#main_section").load(window.location.href+" #total_user_section");
+        },1000);
+
+
+        window.setInterval(function(){
+            $("#main_section_order").load(window.location.href+" #main_section_table");
+        },2000);
     </script>    
 
 

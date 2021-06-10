@@ -21,11 +21,12 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
+        $customer_order_details = Cartorder::all();
         //return Cartorder::all();
         $orders = Cartorder::where('user_id',Auth::id())->latest()->get();
         $creditcard=Cartorder::where('payment_option',1)->count();
         $cod=Cartorder::where('payment_option',2)->count();
-        return view('home', compact('users','orders','creditcard','cod'));
+        return view('home', compact('users','orders','creditcard','cod','customer_order_details'));
     }
     public function download_invoice($order_id){
         $data=Cartorder::find($order_id);

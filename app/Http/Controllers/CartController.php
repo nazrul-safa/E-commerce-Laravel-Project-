@@ -7,11 +7,6 @@ use Carbon\carbon;
 class CartController extends Controller
 {
     function addtocart(Request $req, $product_id){
-
-    echo  $product_id;
-    echo $req->quantity;
-    echo Product::find($product_id)->product_quantity;
-    
     if($req->quantity > Product::find($product_id)->product_quantity){
         return back() -> with('error',"Stock is not available");
     }
