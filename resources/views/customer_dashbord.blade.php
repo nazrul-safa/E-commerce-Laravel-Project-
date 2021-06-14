@@ -9,12 +9,15 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   </head>
+  @section('title')
+   cart
+@endsection
   <body>
      <div class="container">
          <div class="col-md-auto">
             <div class="card">
                 <div class="card-header">
-                    Hello Customer
+                    Hello {{ Auth::user()->name }} ! Welcome to Your Dashbord.
                 </div>
                     <div class="card-body">
                         <table class="table table-bordered">

@@ -4,7 +4,7 @@
 @endsection
 @section('body')
      <!-- .breadcumb-area start -->
-     <div class="breadcumb-area bg-img-4 ptb-100">
+     <div class="breadcumb-area bg-img-4 ptb-100" style="background: url({{ asset('tohoney_assets//images/bg/5.jpg') }});">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -95,14 +95,12 @@
                                     <textarea name="customer_massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery" value="{{ old('customer_massage') }}"></textarea>
                                 </div>
                             </div>
-                        
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="order-area">
                         <h3>Your Order</h3>
                         <ul class="total-cost">
-                        
                             <li>Coupon Name <span class="pull-right"><strong>{{ (session('session_coupon_name'))? session('session_coupon_name') :'Not Applicable' }}</strong></span></li>
                             <li>Subtotal <span class="pull-right"><strong>${{ session('session_subtotal') }}</strong></span></li>
                             <li>Discount <span class="pull-right">{{ session('session_coupon_discount') }}%</span></li>

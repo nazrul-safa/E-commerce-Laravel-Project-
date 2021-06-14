@@ -67,6 +67,10 @@ class HomeController extends Controller
         ]);
     }
     function review_post($order_details_id, Request $request){
+          $request->validate([
+          'review_text' => ['required','max:60'],
+          'stars' => ['required'],
+          ]);
        Review::insert([
            'product_id' => Order_details::find($order_details_id)->product_id,
            'user_id' => Auth::id(),
@@ -75,6 +79,7 @@ class HomeController extends Controller
            'stars' => $request->stars,
            'created_at' => Carbon::now()
        ]);
+      
        return back();
     }
 }

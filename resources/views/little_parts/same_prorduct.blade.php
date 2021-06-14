@@ -6,7 +6,7 @@
             {{-- <img src="{{ asset('photo/product') }}/{{ $product->product_name }}" alt=""> --}}
             <div class="product-icon flex-style">
                 <ul>
-                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
+                    <li><a data-toggle="modal" data-target="#exampleModalCenter{{ $product->id }}" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
                     {{-- <li><a href="{{ url('wishlist')}}/{{ $product->id }}"><i class="fa fa-heart"></i></a></li> --}}
                     <li><a href="{{ route('cart') }} "><i class="fa fa-shopping-bag"></i></a></li>
                 </ul>
@@ -17,17 +17,27 @@
             <p class="pull-left">${{ $product->product_price  }}
             </p>
             <ul class="pull-right d-flex">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-half-o"></i></li>
+                @php
+                    use App\Models\Review;
+                    if(Review::where('product_id', $product->id)->exists()){
+                        $overall_review = Review::where('product_id', $product->id)->sum('stars') / Review::where('product_id', $product->id)->count();
+                    }
+                    else{
+                        $overall_review = 0;
+                    }
+                @endphp
+                @for ($i = 1; $i <= floor($overall_review); $i++)
+                    <li><i class="fa fa-star"></i></li>
+                @endfor
+                @if (is_float($overall_review))
+                    <li><i class="fa fa-star-half-o"></i></li>
+                @endif
             </ul>
         </div>
     </div>
 </li>
  <!-- Modal area start -->
- <div class="modal fade" id="exampleModalCenter" tabindex="-1">
+ <div class="modal fade" id="exampleModalCenter{{ $product->id }}" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">

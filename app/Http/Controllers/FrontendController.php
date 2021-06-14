@@ -68,9 +68,8 @@ class FrontendController extends Controller
     function categorywise($category_id){
         $products = Product::where('category_id',$category_id)->get();
         $category_name = Category::findorfail($category_id);
-        //$product_info = Product::findorfail($product_id);
-        $product_info = Product::findorfail($category_id);
-        return view('categorywise',compact('products','category_name','product_info'));
+       // $product_info = Product::findorfail($category_id);
+        return view('categorywise',compact('products','category_name'));
     }
 
     function contact_get(){
@@ -109,12 +108,6 @@ class FrontendController extends Controller
         return view('cart',compact('carts','coupon_discount','coupon_name'));
     }
 
-    function wishlist($product_id){
-        echo $product_infos = Product::findorfail($product_id);
-          
-        return view('layouts.tohoney',compact('product_infos'));
-    }
-
     function updatecart(Request $req){
         foreach($req->quantity as $cart_id => $quantity){
             if(Product::find(Cart::find($cart_id)->product_id)->product_quantity>=$quantity){
@@ -126,6 +119,7 @@ class FrontendController extends Controller
        return back();
     }
     function checkout(){
+       
         $countries= Country::select('id','name')->get();
         //$cities= City::select('id','name')->get();
         return view('checkout',compact('countries'));
@@ -159,7 +153,6 @@ class FrontendController extends Controller
     function customer_login(){
         return view('customer_login');
     }
-
     function customer_login_post(Request $req){    
        if( User::where('email',$req->email)->exists()){
            $db_password =  User::where('email',$req->email)->first()->password;

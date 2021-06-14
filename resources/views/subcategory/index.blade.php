@@ -42,42 +42,21 @@
                     <table class="table table-dark table-striped">
                         <thead>
                           <tr>
-                            <th scope="col">Delete</th>
                             <th scope="col">Serial No</th>
-                            <th scope="col">Category Name</th>
-                            <th scope="col">Category Photo</th>
+                            <th scope="col">Sub Category Name</th>
                             <th scope="col">Created At</th>
-                            <th scope="col">Updated At</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody> 
                           <form action="{{ route('safa') }}" method="POST">
                           @csrf 
-                          {{-- @forelse ($categories as $category)
+                          @forelse ($subcategory as $subcategor)
                           <tr>
-                            <th>
-                              <input type="checkbox" class="delete_checkbox" name="category_id[]" value=" {{ $category->id }}">
-                            </th>
                             <th>{{ $loop->index +1 }}</th>
-                            <td>{{ $category->category_name }}</td>
-                            <td> <img src="{{ asset('photo') }}/category/{{ $category->category_photo }}" alt="" style="height: 70px" width="70px"></td>
-                            <td>{{ $category->created_at->format('d/m/Y h:i:s A') }}</td>
-                            <td>
-                              @if ($category->updated_at)
-                              {{ $category->updated_at->format('d/m/Y h:i:s A') }}    
-                              @else 
-                                    NULL
-                              @endif
-                            </td>
-                            <td>
-                              <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ url('category/edit') }}/{{ $category->id }}" type="button" class="btn btn-info">Edit</a>
-                                <a href="{{ url('category/delete') }}/{{ $category->id }}" type="button" class="btn btn-danger">Delete</a>
-                                
-                              </div>
-                            </td>
-                            
+                            <td>{{ $subcategor->subcategory_name }}</td>
+                            <td>{{ $subcategor->created_at->format('d/m/Y h:i:s A') }}</td>
+                            <td> <a href="{{ url('subcategory/delete') }}/{{ $subcategor->id }}" type="button" class="btn btn-danger">Delete</a></td>
                           </tr>   
                           @empty
                           <tr class="text-center text-danger">
@@ -85,15 +64,9 @@
                               No Data To show
                             </td>
                           </tr>           
-                          @endforelse  --}}
+                          @endforelse 
                         </tbody>
                     </table>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" class="btn btn-secondary" id="check_all_btn">Check all</button>
-                      <button type="button" class="btn btn-info" id="uncheck_all_btn">Uncheck Check all</button>
-                    </div>
-
-                    <button type="submit" class="btn btn-danger">Delete checked</button>
                      </form>
                 </div>   
         </div>

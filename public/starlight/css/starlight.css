@@ -2422,6 +2422,9 @@ tbody.collapse.show {
   border-top: 0;
   border-bottom: 0.3em solid;
 }
+.dropdown .dropdown-menu{
+  background-color: #0878b9;
+}
 
 .dropdown-menu {
   position: absolute;

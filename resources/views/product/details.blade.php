@@ -1,7 +1,10 @@
 @extends('layouts/tohoney')
+@section('title')
+   {{ $product_info->product_name }}
+@endsection
 @section('body')
      <!-- .breadcumb-area start -->
-    <div class="breadcumb-area bg-img-4 ptb-100">
+    <div class="breadcumb-area bg-img-4 ptb-100"  style="background: url({{ asset('tohoney_assets//images/bg/5.jpg') }});">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -144,9 +147,7 @@
                                             <ul class="rating">
                                                 @for($x =1; $x<= $review->stars; $x++)
                                                   <li><i class="fa fa-star"></i></li>
-                                                @endfor
-                                               
-                                                
+                                                @endfor   
                                             </ul>
                                         </div>
                                     </li>

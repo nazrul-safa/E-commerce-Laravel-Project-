@@ -14,6 +14,12 @@ class ContactController extends Controller
         return view('contact'); 
         }
     function contact_post(Request $req){
+        $req->validate([
+        'fname' => ['required','max:40'],
+        'email' => ['required'],
+        'subject' => ['required'],
+        'msg' => ['required'],
+        ]);
         $details= [
             'fname' =>$req->fname,
             'email' =>$req->email,
@@ -24,6 +30,6 @@ class ContactController extends Controller
         'created_at' => Carbon::now()
         ]);
         Mail::to('nazrul.safa@gmail.com')->send(new SendMessages($details));
-        return back()->with('mesg_send', 'Message Send Successfully');
+        return back()->with('mesg_send', 'Thank You ! Your Message Send Successfully');
     }
 }

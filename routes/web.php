@@ -56,6 +56,8 @@ Route::post('category/check/delete',[CategoryController::class, 'category_check_
 Route::get('subcategory',[SubcategoryController::class, 'subcategory'])->name('subcategory');
 Route::post('subcategory/post',[SubcategoryController::class, 'subcategory_post'])->name('subcategory_post');
 Route::post('get/subcategory/post',[SubcategoryController::class,'subcategory_get_data']);
+Route::get('subcategory/delete/{subcategory_id}',[SubcategoryController::class,'subcategory_delete'])->name('subcategory_delete');
+
 
 //route of product controller
 Route::get('product',[ProductController::class, 'product'])->name('product');

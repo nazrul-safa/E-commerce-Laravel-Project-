@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Laravel </title>
+    <title>Dashbord </title>
 
     <!-- vendor css -->
     <link href="{{ asset('starlight/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
@@ -21,7 +21,7 @@
   <body>
 
     <!-- ########## START: LEFT PANEL ########## -->
-    <div class="sl-logo"><a href="">Dashbord</a></div>
+    <div class="sl-logo"><a href="http://e.nazrulsafa.com/">Safa</a></div>
     <div class="sl-sideleft">
       <div class="input-group input-group-search">
         <input type="search" name="search" class="form-control" placeholder="Search">
@@ -86,19 +86,8 @@
         @endif
         
         
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
-            <span class="menu-item-label">Pages</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="blank.html" class="nav-link">Blank Page</a></li>
-          <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
-          <li class="nav-item"><a href="page-signup.html" class="nav-link">Signup Page</a></li>
-          <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
-        </ul>
+    
+        
       </div><!-- sl-sideleft-menu -->
 
       <br>
@@ -113,12 +102,14 @@
       </div><!-- sl-header-left -->
       <div class="sl-header-right">
         <nav class="nav">
+          
           <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name">{{ Auth::user()->name }}</span>
-              <img src="{{ asset('starlight//img/img5.png') }}" class="wd-32 rounded-circle" alt="">
+            <button class="btn btn-primary dropdown-toggle mr-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ Auth::user()->name }}
+            </button>
+              {{-- <img src="{{ asset('starlight//img/img5.png') }}" class="wd-32 rounded-circle" alt=""> --}}
             </a>
-            <div class="dropdown-menu dropdown-menu-header wd-200">
+            <div class="dropdown-menu dropdown-menu-header wd-200" style="background-color:royalblue">
               <ul class="list-unstyled user-profile-nav">
                 <li><a href=""><i class="icon ion-ios-person-outline"></i>Edit Profile</a></li>
                 <li>

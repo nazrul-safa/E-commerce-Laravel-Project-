@@ -15,7 +15,8 @@ class SubcategoryController extends Controller
     }
     function subcategory(){
         $categories = Category::all();
-        return view('subcategory.index',compact('categories'));
+        $subcategory = Subcategory::all();
+        return view('subcategory.index',compact('categories' , 'subcategory'));
     }
     function subcategory_post(Request $req){
 
@@ -32,5 +33,11 @@ class SubcategoryController extends Controller
             $str_to_send = $str_to_send. "<option value='".$subcategory->id."'>$subcategory->subcategory_name</option>" ;
         }
         echo $str_to_send;
+    }
+    function subcategory_delete($subcategory_id){
+        if(Subcategory::where('id',$subcategory_id)->exists()){ //for double click problem
+        Subcategory::find($subcategory_id)->delete();
+        }
+        return back()->with('category_delete', 'Category Deleted Successfully');
     }
 }

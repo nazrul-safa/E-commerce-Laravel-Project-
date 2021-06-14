@@ -75,7 +75,7 @@
                             <div class="featured-img">
                                 <img src="{{ asset('photo') }}/category/{{ $category->category_photo }}" alt="">
                                 <div class="featured-content">
-                                    <a href="{{ route('categorywise',$category->id) }}">{{ $category->category_name }}</a>
+                                    <a href="{{ url('categorywise/shop')}}/{{ $category->id }}">{{ $category->category_name }}</a>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
     </div>
     <!-- product-area end -->
     <!-- testmonial-area start -->
-    <div class="testmonial-area testmonial-area2 bg-img-2 black-opacity">
+    <div class="testmonial-area testmonial-area2 bg-img-2 black-opacity" style="background: url({{ asset('tohoney_assets//images/bg/1.jpg') }});">
         <div class="container">
             <div class="row">
                 <div class="col-12">

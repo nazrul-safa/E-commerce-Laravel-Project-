@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\cart;
+use App\Models\Cart;
 use App\Models\Product;
 use Carbon\carbon;
 class CartController extends Controller

@@ -6,11 +6,7 @@
     active
 @endsection
 @section('breadcrumb')
-<nav class="breadcrumb sl-breadcrumb">
-    {{-- <a class="breadcrumb-item" href="index.html">Starlight</a>
-    <a class="breadcrumb-item" href="index.html">Pages</a> --}}
-    <span class="breadcrumb-item active">Dashbord</span>
-  </nav>
+
 @endsection
 @section('content')
 {{-- <h2>Role: {{ Auth::user()->role }}</h2> --}}

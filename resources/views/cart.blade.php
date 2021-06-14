@@ -5,7 +5,7 @@
 @section('body')
  <!-- header-area end -->
     <!-- .breadcumb-area start -->
-    <div class="breadcumb-area bg-img-4 ptb-100">
+    <div class="breadcumb-area bg-img-4 ptb-100" style="background: url({{ asset('tohoney_assets//images/bg/5.jpg') }});">
         <div class="container">
             <div class="row">
                 <div class="col-12">

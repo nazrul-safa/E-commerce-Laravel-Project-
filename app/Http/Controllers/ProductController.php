@@ -34,8 +34,8 @@ class ProductController extends Controller
         'product_name' => ['required','string','max:40'],
         'product_price' => ['required'],
         'product_quantity' => ['required'],
-        'product_short_description' => ['required','string','max:40'],
-        'product_long_description' => ['required','string','max:40'],
+        'product_short_description' => ['required','string'],
+        'product_long_description' => ['required','string'],
         'product_alert_quantity' => ['required'],
 
         ]);
@@ -107,6 +107,6 @@ class ProductController extends Controller
         // @unlink($image_path);
         // }
         }
-            return back()->with('product_delete', 'Product Deleted Successfully');    
+        return back()->with('product_delete', 'Product Deleted Successfully');    
     }             
 }

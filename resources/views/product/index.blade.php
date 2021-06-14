@@ -100,27 +100,27 @@
                     </div>
                     <div class="form-group">
                         <label>Product Name</label>
-                        <input type="text" class="form-control" name="product_name">
+                        <input type="text" class="form-control" name="product_name" value="{{ old('product_name') }}">
                     </div>
                     <div class="form-group">
                         <label>Product Price</label>
-                        <input type="text" class="form-control" name="product_price">
+                        <input type="text" class="form-control" name="product_price" value="{{ old('product_name') }}">
                     </div>
                     <div class="form-group">
                         <label>Product Quantity</label>
-                        <input type="text" class="form-control" name="product_quantity">
+                        <input type="text" class="form-control" name="product_quantity" value="{{ old('product_quantity') }}">
                     </div>
                     <div class="form-group">
                         <label>Product Short Description</label>
-                        <textarea class="form-control"  rows="4" name="product_short_description"></textarea>
+                        <textarea class="form-control"  rows="4" name="product_short_description" value="{{ old('product_short_description') }}"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Product Long Description</label>
-                        <textarea class="form-control"  rows="4" name="product_long_description"></textarea>
+                        <textarea class="form-control"  rows="4" name="product_long_description" value="{{ old('product_long_description') }}"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Product Alert Quantity</label>
-                        <input type="text" class="form-control" name="product_alert_quantity">
+                        <input type="text" class="form-control" name="product_alert_quantity" value="{{ old('product_alert_quantity') }}">
                     </div>
                     <div class="form-group">
                         <label>Product Photo</label>

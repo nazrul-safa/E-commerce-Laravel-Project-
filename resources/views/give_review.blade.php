@@ -41,8 +41,14 @@
                                 <form action="{{ route('review_post' , $order_detail->id) }} " method="POST">
                                     @csrf
                                     <input type="text" name="review_text" class="form-control">
+                                    @error('review_text')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     <br>
                                     <input type="range" id="points" name="stars" min="1" max="5" value="1" step="1">
+                                    @error('stars')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     <br>
                                     <button type="submit" class="btn btn-success"> Give Review</button>
                                 </form>
